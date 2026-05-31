@@ -1,0 +1,86 @@
+﻿Created At: 2026-05-22T06:53:27Z
+Completed At: 2026-05-22T06:53:27Z
+File Path: `file:///c:/Users/kyara/OneDrive/Documents/PROJECTS/vardhan%20portfolio/src/components/Hero.jsx`
+Total Lines: 360
+Total Bytes: 16774
+Showing lines 1 to 360
+The following code has been modified to include a line number before every line, in the format: <line_number>: <original_line>. Please note that any changes targeting the original code should remove the line number, colon, and leading space.
+1: import React, { useRef, useMemo, useEffect, useState } from 'react';
+2: import { Canvas, useFrame, useThree } from '@react-three/fiber';
+3: import { Float, MeshDistortMaterial, Sphere, Torus, Icosahedron, Octahedron, MeshTransmissionMaterial } from '@react-three/drei';
+4: import { motion } from 'framer-motion';
+5: import * as THREE from 'three';
+6: 
+7: /* ===== MOUSE TRACKER CONTEXT ===== */
+8: const mousePos = { x: 0, y: 0 };
+9: 
+10: /* ===== FLOATING PARTICLE FIELD ===== */
+11: const ParticleField = ({ count = 600 }) => {
+12:     const meshRef = useRef();
+13:     const positions = useMemo(() => {
+14:         const pos = new Float32Array(count * 3);
+15:         for (let i = 0; i < count * 3; i++) pos[i] = (Math.random() - 0.5) * 25;
+16:         return pos;
+17:     }, [count]);
+18: 
+19:     useFrame((state) => {
+20:         if (meshRef.current) {
+21:             meshRef.current.rotation.y = state.clock.elapsedTime * 0.015;
+22:             meshRef.current.rotation.x = Math.sin(state.clock.elapsedTime * 0.008) * 0.15;
+23:         }
+24:     });
+25: 
+26:     return (
+27:         <points ref={meshRef}>
+28:             <bufferGeometry>
+29:                 <bufferAttribute attach="attributes-position" count={count} array={positions} itemSize={3} />
+30:             </bufferGeometry>
+31:             <pointsMaterial size={0.025} color="#D4AF37" transparent opacity={0.5} sizeAttenuation />
+32:         </points>
+33:     );
+34: };
+35: 
+36: /* ===== MOUSE-REACTIVE 3D SCENE ===== */
+37: const MouseTracker = ({ children })
+<truncated 14930 bytes>
+           className="flex flex-col sm:flex-row gap-4"
+323:                     >
+324:                         <a href="#projects" className="btn-primary">
+325:                             VIEW PROJECTS
+326:                             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><path d="M7 17L17 7M17 7H7M17 7V17" /></svg>
+327:                         </a>
+328:                         <a href="#contact" className="btn-outline">
+329:                             CONTACT ME
+330:                         </a>
+331:                     </motion.div>
+332:                 </div>
+333: 
+334:                 {/* Scroll indicator */}
+335:                 <motion.div
+336:                     initial={{ opacity: 0 }}
+337:                     animate={{ opacity: 1 }}
+338:                     transition={{ delay: 2.5 }}
+339:                     className="absolute bottom-12 left-1/2 -translate-x-1/2 flex flex-col items-center gap-3"
+340:                 >
+341:                     <motion.div
+342:                         className="w-5 h-8 rounded-full border flex items-start justify-center pt-1.5"
+343:                         style={{ borderColor: 'rgba(212,175,55,0.25)' }}
+344:                     >
+345:                         <motion.div
+346:                             animate={{ y: [0, 10, 0] }}
+347:                             transition={{ duration: 1.5, repeat: Infinity }}
+348:                             className="w-1 h-1 rounded-full"
+349:                             style={{ background: '#D4AF37' }}
+350:                         />
+351:                     </motion.div>
+352:                     <span className="text-[10px] tracking-[0.3em] font-medium" style={{ color: 'rgba(212,175,55,0.2)' }}>SCROLL</span>
+353:                 </motion.div>
+354:             </div>
+355:         </section>
+356:     );
+357: };
+358: 
+359: export default Hero;
+360: 
+The above content shows the entire, complete file contents of the requested file.
+
